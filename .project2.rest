@@ -1,11 +1,11 @@
 ### get all entrepreneurs
-GET http://localhost:3000/entrepreneurs
+GET http://cse341-project2-3y9c.onrender.com/entrepreneurs
 
 ### get all companies
-GET http://localhost:3000/companies
+GET http://cse341-project2-3y9c.onrender.com/companies
 
 ### get entrepreneur by id
-GET http://localhost:3000/entrepreneurs/682fa3fdda8c7d8157c18d54
+GET http://cse341-project2-3y9c.onrender.com/entrepreneurs/682fa3fdda8c7d8157c18d54
 
 ### get company by id
-GET http://localhost:3000/companies/682fa758da8c7d8157c18d58 
+GET http://cse341-project2-3y9c.onrender.com/companies/682fa758da8c7d8157c18d58 
