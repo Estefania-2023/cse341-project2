@@ -1,0 +1,11 @@
+### get all entrepreneurs
+GET http://localhost:3000/entrepreneurs
+
+### get all companies
+GET http://localhost:3000/companies
+
+### get entrepreneur by id
+GET http://localhost:3000/entrepreneurs/682fa3fdda8c7d8157c18d54
+
+### get company by id
+GET http://localhost:3000/companies/682fa758da8c7d8157c18d58 
