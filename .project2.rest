@@ -1,11 +1,76 @@
 ### get all entrepreneurs
-GET http://cse341-project2-3y9c.onrender.com/entrepreneurs
+GET http://localhost:3000/entrepreneurs
 
 ### get all companies
-GET http://cse341-project2-3y9c.onrender.com/companies
+GET http://localhost:3000/companies
 
 ### get entrepreneur by id
-GET http://cse341-project2-3y9c.onrender.com/entrepreneurs/682fa3fdda8c7d8157c18d54
+GET http://localhost:3000/entrepreneurs/682fa3fdda8c7d8157c18d54
 
 ### get company by id
-GET http://cse341-project2-3y9c.onrender.com/companies/682fa758da8c7d8157c18d58 
+GET http://localhost:3000/companies/682fa758da8c7d8157c18d58 
+
+###CRUD operation with entrepreneurs
+###Create a new entrepreneur
+POST http://localhost:3000/entrepreneurs HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Sofia",
+    "lastName": "Vargas",
+    "phoneNumber": "+52-55-1234-5678",
+    "email": "SVargas@gmail.mx",
+    "birthday": "25/08/1987",
+    "nationality": "Mexican",
+    "yearsExperience": 9,
+    "company": "TastyBytes"
+}
+
+###Update a entrepreneur by ID. For example:
+PUT http://localhost:3000/entrepreneurs/6830ad635c4be640fe37cd64 HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Sara",
+    "lastName": "Rahman",
+    "phoneNumber": "+91-98765-12245",
+    "email": "SRahman5@innovate.com",
+    "birthday": "05/08/1992",
+    "nationality": "Indian",
+    "yearsExperience": 10,
+    "company": "HealthTech Corp"
+}
+
+###Delete a entrepreneur by ID. For example:
+DELETE http://localhost:3000/entrepreneurs/6830ac9b781aff9afca000b0 HTTP/1.1
+
+
+###CRUD operation with companies
+###Create a new company
+POST http://localhost:3000/companies HTTP/1.1
+content-type: application/json
+
+{
+    "name": "TastyBytes",
+    "industry": "Food & Beverage",
+    "foundedYear": 2017,
+    "numberEmployees": 30,
+    "founder": "Sofia Vargas",
+    "address": "Mexico City Culinary District, Mexico City"
+}
+
+###Update a company by ID. For example:
+PUT http://localhost:3000/companies/682faa2dda8c7d8157c18d5a HTTP/1.1
+content-type: application/json
+
+{
+    "name": "HealthTech Corp",
+    "industry": "Healthcare Technology",
+    "foundedYear": 2015,
+    "numberEmployees": 60,
+    "founder": "Aisha Rahman",
+    "address": "789 Wellness St, Bangalore"
+}
+
+###Delete a company by ID. For example:
+DELETE http://localhost:3000/companies/6830b2ddfe9ccfb9b3e64f4d HTTP/1.1
