@@ -3,11 +3,24 @@ const router = express.Router();
 
 const compaController = require('../controllers/companies');
 
-router.get("/", compaController.getAll);
-router.get("/:id", compaController.getSingle);
+const {
+    createcompaValidationRules,
+    updatecompaValidationRules,
+    getcompaValidationRules,
+    deletecompaValidationRules,
+} = require('../validations/compaValidation');
 
-router.post("/", compaController.createCompa);
-router.put("/:id", compaController.updateCompa);
-router.delete("/:id", compaController.deleteCompa);
+
+const validateRequest = require('../middleware/validate');
+
+router.get('/', compaController.getAll);
+
+router.get('/:id', getcompaValidationRules(),validateRequest,compaController.getSingle);
+
+router.post('/', createcompaValidationRules(), validateRequest,compaController.createCompa);
+
+router.put('/:id', updatecompaValidationRules(), validateRequest,compaController.updateCompa);
+
+router.delete('/:id', deletecompaValidationRules(), validateRequest,compaController.deleteCompa);
 
 module.exports = router;
