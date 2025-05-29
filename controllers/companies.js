@@ -12,10 +12,19 @@ const getAll = async(req, res) => {
 };
 
 const getSingle = async(req, res) => {
+    //#swagger.tags = ['Companies']
+    try {     
         const compaId = new ObjectId(req.params.id);
-        const result = await mongodb.getDatabase().db().collection('companies').findOne({_id: compaId});
-        if (result) res.status(200).json(result);
-        else res.status(404).json({ message: 'Company not found' });
+        const result = await mongodb.getDatabase().db().collection('companies').findOne({ _id: compaId });
+        if (result) { 
+            res.status(200).json(result);
+        } else {
+            res.status(404).json({ message: 'Company not found' });
+        } 
+    } catch (err) {
+        console.error(err);  
+        res.status(500).json({ message: 'Server error while fetching the company.'});
+    }
 };
 
 const createCompa = async(req, res) => {
@@ -28,9 +37,17 @@ const createCompa = async(req, res) => {
         founder: req.body.founder,
         address: req.body.address
     };
-    const response = await mongodb.getDatabase().db().collection('companies').insertOne(compa);
-    if (response.acknowledged) res.status(201).json(response);
-    else res.status(500).json(response.error || 'Error creating company');
+    try {
+        const response = await mongodb.getDatabase().db().collection('companies').insertOne(compa);    
+        if (response.acknowledged) {
+            res.status(201).json(response);
+        } else  { 
+            res.status(500).json(response.error || 'Error creating company');
+        }
+    } catch (err) {
+        console.error(err); 
+        res.status(500).json({ message: 'Server error while creating the company.'});
+    }
 }
 
 const updateCompa = async(req, res) => {
@@ -44,17 +61,33 @@ const updateCompa = async(req, res) => {
         founder: req.body.founder,
         address: req.body.address
     };
-    const response = await mongodb.getDatabase().db().collection('companies').replaceOne({ _id: compaId}, compa);
-    if (response.modifiedCount > 0) res.status(204).send();
-    else res.status(404).json({ message: 'Company not found' });
+    try { 
+        const response = await mongodb.getDatabase().db().collection('companies').replaceOne({ _id: compaId }, compa);
+        if (response.modifiedCount > 0) { 
+        res.status(204).send();
+    } else {
+        res.status(404).json({ message: 'Company not found' });
+    }
+    } catch (err) {
+        console.error(err); 
+        res.status(500).json({ message: 'Server error while updating the company.'});
+    }
 }
 
 const deleteCompa = async(req, res) => {
     //#swagger.tags = ['Companies']
-    const compaId = new ObjectId(req.params.id);
-    const response = await mongodb.getDatabase().db().collection('companies').deleteOne({ _id: compaId });
-    if (response.deletedCount > 0) res.status(204).send();
-    else res.status(404).json({ message: 'Company not found' });
+    try { 
+        const compaId = new ObjectId(req.params.id);
+        const response = await mongodb.getDatabase().db().collection('companies').deleteOne({ _id: compaId });
+        if (response.deletedCount > 0) {
+            res.status(204).send();
+        } else { 
+            res.status(404).json({ message: 'Company not found' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error while deleting the company.'});
+    }
 }
 
     module.exports = {
