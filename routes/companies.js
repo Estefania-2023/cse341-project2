@@ -10,17 +10,18 @@ const {
     deletecompaValidationRules,
 } = require('../validations/compaValidation');
 
+const { isAuthenticated } = require('../middleware/authenticate');
 
 const validateRequest = require('../middleware/validate');
 
 router.get('/', compaController.getAll);
 
-router.get('/:id', getcompaValidationRules(),validateRequest,compaController.getSingle);
+router.get('/:id', isAuthenticated, getcompaValidationRules(),validateRequest,compaController.getSingle);
 
-router.post('/', createcompaValidationRules(), validateRequest,compaController.createCompa);
+router.post('/', isAuthenticated, createcompaValidationRules(),validateRequest,compaController.createCompa);
 
-router.put('/:id', updatecompaValidationRules(), validateRequest,compaController.updateCompa);
+router.put('/:id', isAuthenticated, updatecompaValidationRules(),validateRequest,compaController.updateCompa);
 
-router.delete('/:id', deletecompaValidationRules(), validateRequest,compaController.deleteCompa);
+router.delete('/:id', isAuthenticated, deletecompaValidationRules(),validateRequest,compaController.deleteCompa);
 
 module.exports = router;
